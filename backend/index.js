@@ -7,7 +7,7 @@ import authRouter from "./src/routes/auth.route.js";
 import profileRouter from "./src/routes/profile.route.js";
 import addressRouter from "./src/routes/address.route.js";
 import orderRouter from "./src/routes/order.route.js";
-
+import cartRouter from "./src/routes/cart.route.js";
 const app = express();
 const SERVER_PORT = 3000;
 const uploadImageDir = path.join(process.cwd(), "src", "upload", "img");
@@ -21,6 +21,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/profile", profileRouter);
 app.use("/api/address", addressRouter);
 app.use("/api/orders", orderRouter);
+app.use("/api/cart", cartRouter);
 
 app.listen(SERVER_PORT, () => {
     console.log(`Server is running on port ${SERVER_PORT}`);
