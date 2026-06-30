@@ -20,35 +20,7 @@ class AdminImportService {
         };
     }
 
-    chuanHoaRowsNhapHang(payload) {
-        if (Array.isArray(payload.rows)) {
-            return payload.rows;
-        }
 
-        const bientheIdArr = Array.isArray(payload.bienthe_id) ? payload.bienthe_id : [];
-        const soluongArr = Array.isArray(payload.soluong) ? payload.soluong : [];
-        const dongiaArr = Array.isArray(payload.dongia) ? payload.dongia : [];
-        const ghichuArr = Array.isArray(payload.ghichu) ? payload.ghichu : [];
-
-        const maxLength = Math.max(
-            bientheIdArr.length,
-            soluongArr.length,
-            dongiaArr.length,
-            ghichuArr.length
-        );
-
-        const rows = [];
-        for (let i = 0; i < maxLength; i += 1) {
-            rows.push({
-                bienthe_id: bientheIdArr[i],
-                soluong: soluongArr[i],
-                dongia: dongiaArr[i],
-                ghichu: ghichuArr[i]
-            });
-        }
-
-        return rows;
-    }
 
     async themPhieuNhap(payload) {
             console.log("========== SERVICE ==========");
@@ -65,37 +37,7 @@ class AdminImportService {
             ghichu: String(row.ghichu || "").trim()
         }));
 
-        if (!rows.length) {
-            throw {
-                status: 400,
-                message: "Phieu nhap phai co it nhat 1 dong"
-            };
-        }
-
-        for (const row of rows) {
-
-            if (!Number.isInteger(row.bienthe_id) || row.bienthe_id <= 0) {
-                throw {
-                    status: 400,
-                    message: "Bien the khong hop le"
-                };
-            }
-
-            if (!Number.isInteger(row.soluong) || row.soluong <= 0) {
-                throw {
-                    status: 400,
-                    message: "So luong phai lon hon 0"
-                };
-            }
-
-            if (isNaN(row.dongia) || row.dongia < 1000) {
-                throw {
-                    status: 400,
-                    message: "Don gia phai >= 1000"
-                };
-            }
-
-        }
+ 
 
         let tongtien = 0;
         for (const row of rows) {
@@ -116,9 +58,7 @@ class AdminImportService {
 
             for (const row of rows) {
                 const bienthe = await adminImportDAO.layBienTheById(connection, row.bienthe_id);
-                if (!bienthe) {
-                    throw { status: 400, message: `Bien the khong ton tai: ${row.bienthe_id}` };
-                }
+
 
                 const thanhtien = row.soluong * row.dongia;
 
