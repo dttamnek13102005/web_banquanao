@@ -19,6 +19,7 @@ class AdminImportService {
             tongSoLuong
         };
     }
+
     chuanHoaRowsNhapHang(payload) {
         if (Array.isArray(payload.rows)) {
             return payload.rows;
@@ -49,7 +50,6 @@ class AdminImportService {
         return rows;
     }
 
-
     async themPhieuNhap(payload) {
             console.log("========== SERVICE ==========");
     console.log(JSON.stringify(payload, null, 2));
@@ -65,7 +65,37 @@ class AdminImportService {
             ghichu: String(row.ghichu || "").trim()
         }));
 
- 
+        if (!rows.length) {
+            throw {
+                status: 400,
+                message: "Phieu nhap phai co it nhat 1 dong"
+            };
+        }
+
+        for (const row of rows) {
+
+            if (!Number.isInteger(row.bienthe_id) || row.bienthe_id <= 0) {
+                throw {
+                    status: 400,
+                    message: "Bien the khong hop le"
+                };
+            }
+
+            if (!Number.isInteger(row.soluong) || row.soluong <= 0) {
+                throw {
+                    status: 400,
+                    message: "So luong phai lon hon 0"
+                };
+            }
+
+            if (isNaN(row.dongia) || row.dongia < 1000) {
+                throw {
+                    status: 400,
+                    message: "Don gia phai >= 1000"
+                };
+            }
+
+        }
 
         let tongtien = 0;
         for (const row of rows) {
@@ -85,7 +115,6 @@ class AdminImportService {
             });
 
             for (const row of rows) {
-                const bienthe = await adminImportDAO.layBienTheById(connection, row.bienthe_id);
                 const bienthe = await adminImportDAO.layBienTheById(connection, row.bienthe_id);
                 if (!bienthe) {
                     throw { status: 400, message: `Bien the khong ton tai: ${row.bienthe_id}` };
