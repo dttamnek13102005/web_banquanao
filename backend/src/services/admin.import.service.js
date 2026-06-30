@@ -58,7 +58,10 @@ class AdminImportService {
 
             for (const row of rows) {
                 const bienthe = await adminImportDAO.layBienTheById(connection, row.bienthe_id);
-
+                const bienthe = await adminImportDAO.layBienTheById(connection, row.bienthe_id);
+                if (!bienthe) {
+                    throw { status: 400, message: `Bien the khong ton tai: ${row.bienthe_id}` };
+                }
 
                 const thanhtien = row.soluong * row.dongia;
 
