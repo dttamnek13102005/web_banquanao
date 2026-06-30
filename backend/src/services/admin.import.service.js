@@ -19,7 +19,35 @@ class AdminImportService {
             tongSoLuong
         };
     }
+    chuanHoaRowsNhapHang(payload) {
+        if (Array.isArray(payload.rows)) {
+            return payload.rows;
+        }
 
+        const bientheIdArr = Array.isArray(payload.bienthe_id) ? payload.bienthe_id : [];
+        const soluongArr = Array.isArray(payload.soluong) ? payload.soluong : [];
+        const dongiaArr = Array.isArray(payload.dongia) ? payload.dongia : [];
+        const ghichuArr = Array.isArray(payload.ghichu) ? payload.ghichu : [];
+
+        const maxLength = Math.max(
+            bientheIdArr.length,
+            soluongArr.length,
+            dongiaArr.length,
+            ghichuArr.length
+        );
+
+        const rows = [];
+        for (let i = 0; i < maxLength; i += 1) {
+            rows.push({
+                bienthe_id: bientheIdArr[i],
+                soluong: soluongArr[i],
+                dongia: dongiaArr[i],
+                ghichu: ghichuArr[i]
+            });
+        }
+
+        return rows;
+    }
 
 
     async themPhieuNhap(payload) {
