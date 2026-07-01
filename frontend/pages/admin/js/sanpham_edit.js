@@ -9,8 +9,9 @@ function taoUrlXemTruocAnh(hinhanh) {
     }
 
     if (/^https?:\/\//i.test(value)) return value;
-    if (value.startsWith('product/')) return `http://localhost:3000/upload/img/${value}`;
-    return `http://localhost:3000/upload/img/product/${value}`;
+    const backendUrl = window.BACKEND_URL || 'http://localhost:3000';
+    if (value.startsWith('product/')) return `${backendUrl}/upload/img/${value}`;
+    return `${backendUrl}/upload/img/product/${value}`;
 }
 
 function renderPreview(hinhanh) {

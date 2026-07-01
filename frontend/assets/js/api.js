@@ -1,4 +1,5 @@
-const BASE_URL = '/api';
+window.BACKEND_URL = window.BACKEND_URL || 'http://localhost:3000';
+const BASE_URL = `${window.BACKEND_URL}/api`;
 function getHeaders() {
     const headers = { 'Content-Type': 'application/json' };
     const token = localStorage.getItem('token');
