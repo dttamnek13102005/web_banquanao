@@ -1,5 +1,7 @@
-window.BACKEND_URL = window.BACKEND_URL || 'http://localhost:3000';
-const IMAGE_BASE = `${window.BACKEND_URL}/upload/img`;
+
+window.BACKEND_URL = 'http://localhost:3000/';
+
+const IMAGE_BASE = `${window.BACKEND_URL.replace(/\/+$/, '')}/upload/img`;
 const FRONTEND_IMAGE_BASE = '/assets/images';
 
 function normalizeImagePath(filename) {

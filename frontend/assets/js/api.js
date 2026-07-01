@@ -1,5 +1,5 @@
-window.BACKEND_URL = window.BACKEND_URL || 'http://localhost:3000';
-const BASE_URL = `${window.BACKEND_URL}/api`;
+// Sử dụng cấu hình BACKEND_URL chung được định nghĩa từ file image.js
+const BASE_URL = `${(window.BACKEND_URL || 'http://localhost:3000/').replace(/\/+$/, '')}/api`;
 function getHeaders() {
     const headers = { 'Content-Type': 'application/json' };
     const token = localStorage.getItem('token');
