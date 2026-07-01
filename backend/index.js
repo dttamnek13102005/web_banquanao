@@ -10,7 +10,8 @@ import addressRouter from "./src/routes/address.route.js";
 import orderRouter from "./src/routes/order.route.js";
 import profileRouter from "./src/routes/profile.route.js";
 const app = express();
-const SERVER_PORT = 3000;
+// Cấu hình cổng (port) chạy server: ưu tiên đọc từ file .env (process.env.PORT), nếu không có thì mặc định dùng cổng 3000
+const SERVER_PORT = process.env.PORT || 3000;
 const uploadImageDir = path.join(process.cwd(), "src", "upload", "img");
 
 app.use(cors());
