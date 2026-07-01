@@ -2,7 +2,6 @@ import pool from "../../config/db.js";
 import adminImportDAO from "../../dao/admin/admin.import.dao.js";
 
 class AdminImportService {
-
     async layNhapHang(keyword = "") {
         const data = await adminImportDAO.layDanhSachPhieuNhap(keyword);
         let tongTien = 0;
@@ -51,8 +50,8 @@ class AdminImportService {
     }
 
     async themPhieuNhap(payload) {
-            console.log("========== SERVICE ==========");
-    console.log(JSON.stringify(payload, null, 2));
+        console.log("========== SERVICE ==========");
+        console.log(JSON.stringify(payload, null, 2));
         const ghichu_phieu = String(payload.ghichu_phieu || "").trim();
         const nha_cung_cap = String(payload.nha_cung_cap || "").trim();
         const nguoitao_id = payload.nguoitao_id ? Number(payload.nguoitao_id) : null;
