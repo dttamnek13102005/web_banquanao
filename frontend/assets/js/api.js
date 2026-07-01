@@ -1,4 +1,4 @@
-const BASE_URL = 'https://52.76.98.228:3000/api';
+const BASE_URL = '/api';
 function getHeaders() {
     const headers = { 'Content-Type': 'application/json' };
     const token = localStorage.getItem('token');
