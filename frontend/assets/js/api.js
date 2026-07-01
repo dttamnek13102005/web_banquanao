@@ -22,6 +22,13 @@ async function apiCall(endpoint, method = 'GET', body = null) {
         const response = await fetch(`${BASE_URL}${endpoint}`, options);
         const data = await response.json().catch(() => ({}));
         if (!response.ok) {
+            if (response.status === 401) {
+                localStorage.clear();
+                const currentPath = window.location.pathname.toLowerCase();
+                if (!currentPath.includes('/pages/auth/')) {
+                    window.location.href = '/pages/auth/login.html';
+                }
+            }
             if (response.status >= 500) {
                 throw new Error(data.message || `Lỗi Server: ${response.status}`);
             }
@@ -51,6 +58,13 @@ async function apiUpload(endpoint, formData) {
 
         const data = await response.json().catch(() => ({}));
         if (!response.ok) {
+            if (response.status === 401) {
+                localStorage.clear();
+                const currentPath = window.location.pathname.toLowerCase();
+                if (!currentPath.includes('/pages/auth/')) {
+                    window.location.href = '/pages/auth/login.html';
+                }
+            }
             if (response.status >= 500) {
                 throw new Error(data.message || `Lỗi Server: ${response.status}`);
             }

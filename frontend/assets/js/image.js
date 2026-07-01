@@ -1,5 +1,5 @@
 
-window.BACKEND_URL = 'http://localhost:3000/';
+window.BACKEND_URL = 'http://52.76.98.228:3000/';
 
 const IMAGE_BASE = `${window.BACKEND_URL.replace(/\/+$/, '')}/upload/img`;
 const FRONTEND_IMAGE_BASE = '/assets/images';

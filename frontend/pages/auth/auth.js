@@ -22,11 +22,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     localStorage.setItem("fullname", user.fullname || username);
                     localStorage.setItem("avatar", user.avatar || "user.webp");
                     localStorage.setItem("role", role);
-
-                    // không dùng jwt
-                    // if (data.token || data.data?.token) {
-                    //     localStorage.setItem("token", data.token || data.data.token);
-                    // }
+                    // Lưu token xác thực JWT vào localStorage để gửi kèm trong Authorization header
+                    if (data.token) {
+                        localStorage.setItem("token", data.token);
+                    }
                     if (role === "admin") {
                         window.location.href = "../../pages/admin/index.html";
                     } else {
